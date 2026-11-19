@@ -1,0 +1,118 @@
+=== KENO core self-test ===
+
+[table + pockets]
+  PASS  blue cloth, cushion x0.7: rect within 6px (full-res)   [L6.0 R6.0 T6.0 B6.0]
+  PASS  blue cloth, cushion x0.7: 6/6 pockets confirmed   [6/6]
+  PASS  blue cloth, cushion x1.0: rect within 26px (full-res)   [L22.0 R22.0 T22.0 B22.0]
+  PASS  blue cloth, cushion x1.0: 6/6 pockets confirmed   [6/6]
+  PASS  green cloth, cushion x0.7: rect within 6px (full-res)   [L6.0 R6.0 T6.0 B6.0]
+  PASS  green cloth, cushion x0.7: 6/6 pockets confirmed   [6/6]
+  PASS  green cloth, cushion x1.0: rect within 26px (full-res)   [L20.0 R20.0 T20.0 B20.0]
+  PASS  green cloth, cushion x1.0: 6/6 pockets confirmed   [6/6]
+  PASS  red cloth, cushion x0.7: rect within 6px (full-res)   [L6.0 R6.0 T6.0 B6.0]
+  PASS  red cloth, cushion x0.7: 6/6 pockets confirmed   [6/6]
+  PASS  red cloth, cushion x1.0: rect within 26px (full-res)   [L22.0 R22.0 T22.0 B22.0]
+  PASS  red cloth, cushion x1.0: 6/6 pockets confirmed   [6/6]
+  PASS  purple cloth, cushion x0.7: rect within 6px (full-res)   [L6.0 R6.0 T6.0 B6.0]
+  PASS  purple cloth, cushion x0.7: 6/6 pockets confirmed   [6/6]
+  PASS  purple cloth, cushion x1.0: rect within 26px (full-res)   [L22.0 R22.0 T22.0 B22.0]
+  PASS  purple cloth, cushion x1.0: 6/6 pockets confirmed   [6/6]
+
+[ball detection]
+  PASS  random layout 1: ball count 9   [found 9]
+  PASS  random layout 1: all balls matched, worst centre error <= 1.2 analysis px   [matched 9, worst 1.19 px]
+  PASS  random layout 1: radius estimate   [est 16.5 gt 16.0 (full-res)]
+  PASS  random layout 1: white cue ball identified at the right place
+  PASS  random layout 2: ball count 9   [found 9]
+  PASS  random layout 2: all balls matched, worst centre error <= 1.2 analysis px   [matched 9, worst 1.14 px]
+  PASS  random layout 2: radius estimate   [est 16.5 gt 16.0 (full-res)]
+  PASS  random layout 2: white cue ball identified at the right place
+  PASS  random layout 3: ball count 9   [found 9]
+  PASS  random layout 3: all balls matched, worst centre error <= 1.2 analysis px   [matched 9, worst 0.97 px]
+  PASS  random layout 3: radius estimate   [est 16.8 gt 16.0 (full-res)]
+  PASS  random layout 3: white cue ball identified at the right place
+  PASS  random layout 4: ball count 9   [found 9]
+  PASS  random layout 4: all balls matched, worst centre error <= 1.2 analysis px   [matched 9, worst 0.90 px]
+  PASS  random layout 4: radius estimate   [est 16.6 gt 16.0 (full-res)]
+  PASS  random layout 4: white cue ball identified at the right place
+  PASS  balls touching cushions + aim line + stick: ball count 4   [found 4]
+  PASS  balls touching cushions + aim line + stick: all balls matched, worst centre error <= 1.6 analysis px   [matched 4, worst 1.02 px]
+  PASS  balls touching cushions + aim line + stick: radius estimate   [est 16.5 gt 16.0 (full-res)]
+  PASS  balls touching cushions + aim line + stick: white cue ball identified at the right place
+
+[rack of 15 + cue]
+  PASS  rack: ball count 16   [found 16]
+  PASS  rack: all balls matched, worst centre error <= 1.5 analysis px   [matched 16, worst 1.28 px]
+  PASS  rack: radius estimate   [est 16.4 gt 16.0 (full-res)]
+  PASS  rack: white cue ball identified at the right place
+
+[aim line detection]
+  PASS  aim angle found within 0.5 deg in 24 random shots (incl. white sticks)   [fails=0 worst=0.36 deg]
+  PASS  no guide line on screen -> no aim reported
+
+[spin widget]
+  PASS  calibrated spin reading within 0.12 of truth (dot drawn at 0.85 of radius)   [worst 0.045]
+  PASS  auto-locate finds the white-ball-with-red-dot widget   [7/7]
+  PASS  no widget -> reading reports found=false (no fake spin)
+  PASS  no widget -> auto-locate returns null
+
+[self-capture: KENO's own overlay must not disturb detection]
+    iter 0: aim=202.49 balls=8 tracker=VISIBLE moving=false pred=true mask=0
+    iter 1: aim=202.44 balls=8 tracker=VISIBLE moving=false pred=true mask=6572
+    iter 2: aim=202.13 balls=8 tracker=VISIBLE moving=false pred=true mask=5802
+    iter 3: aim=202.49 balls=8 tracker=VISIBLE moving=false pred=true mask=5509
+    iter 4: aim=202.44 balls=8 tracker=VISIBLE moving=false pred=true mask=6494
+    iter 5: aim=202.13 balls=8 tracker=VISIBLE moving=false pred=true mask=5802
+    iter 6: aim=202.49 balls=8 tracker=VISIBLE moving=false pred=true mask=5509
+    iter 7: aim=202.44 balls=8 tracker=VISIBLE moving=false pred=true mask=6494
+  PASS  aim angle stays on the game's real line over 8 frames with KENO's overlay drawn   [final err 0.25 deg, worst frame-to-frame drift 0.36 deg]
+  PASS  ball count unchanged with overlay drawn   [found 8]
+  PASS  KENO overlay produced primitives
+
+[physics]
+    head-on: stun cue stops at x=1.208 (contact 1.143), follow ends x=2.790, draw ends x=0.228, target ends x=8.887
+  PASS  stun (centre ball) head-on: cue stops almost dead at the contact point
+  PASS  top spin / follow: cue ball rolls FORWARD past the contact point
+  PASS  back spin / draw: cue ball comes BACK
+  PASS  follow goes further forward than stun, draw further back (ordering)
+  PASS  target ball is driven forward by all three
+    30? cut stun: target leaves at -30.0?, cue at 53.9?, angle between 83.9?
+  PASS  target ball leaves along the line of centres (-30? vs cue line)
+  PASS  stun shot: cue and target part at about 90? (tangent line rule)   [83.9?]
+    45? bank off the top cushion: no spin leaves at -38.0?, right english -38.9?, left english -27.6?
+  PASS  no-spin bank reflects downward at roughly the mirror angle (-45?, softened by cushion loss)   [-38.0?]
+  PASS  side spin changes the cushion rebound angle   [difference 11.3?]
+  PASS  opposite side spins deflect in opposite directions about the no-spin line
+  PASS  object ball pots in the corner pocket it was aimed at
+  PASS  random hard shots: no ball ever leaves the table
+    full 16-ball break simulation: 155 ms on this machine
+  PASS  full break simulates in under 600 ms (desktop JVM; phone will be slower)
+
+[aim stabiliser: small nudge vs large move]
+  PASS  first sight: hidden while settling
+  PASS  after settling: visible at 10?
+  PASS  tiny nudge (0.5?): stays visible   [angle 10.50]
+  PASS  sub-deadband jitter does not move the line
+  PASS  medium move (1.5?): old line stays visible but marked stale
+  PASS  medium move once settled: recalculated at 12?
+  PASS  large move (13?): line disappears
+  PASS  large move once settled: line is back at the new angle
+  PASS  balls moving (shot in progress): hidden
+  PASS  aim detection drops for 100 ms: line held (stale)
+  PASS  aim line gone for >450 ms: hidden
+  PASS  live mode: follows a large move at once
+
+[end to end: pixels -> prediction]
+    status: Stol OK (6/6 d?epova) ? kugli: 2 ? bijela: da ? cilj: 12.9? ? spin: sa ekrana (auto) (+0.00, +0.00)
+  PASS  analysis produced a prediction from raw pixels
+  PASS  a first contact with the target ball was predicted
+    ghost-ball centre error: 3.16 px (full-res)
+  PASS  predicted ghost-ball position matches the true geometry within 4 px (full-res, ~1/4 ball radius)
+  PASS  target leaves along the line of centres (-12.0? expected)   [-12.21?]
+  PASS  spin widget read from screen as centre (no spin)   [sa ekrana (auto)]
+    angle between target path and cue path after a 25? cut: top-spin 82.9?, no spin 84.7?, back-spin 90.4?
+  PASS  top spin read from the screen: cue ball follows through (smaller parting angle than no spin)
+  PASS  back spin read from the screen: cue ball pulls away (larger parting angle than no spin)
+  PASS  everything is drawn: scene has lines
+
+82 checks, 0 failed
